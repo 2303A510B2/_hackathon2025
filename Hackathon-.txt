@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 100
+
+typedef struct {
+    char name[50];
+    char empCode[20];
+    char department[50];
+    char publications[200];
+    char seminars[200];
+    char projects[200];
+    char lectures[200];
+} Faculty;
+
+Faculty facultyDB[MAX];
+int facultyCount = 0;
+
+void registerFaculty() {
+    if (facultyCount >= MAX) {
+        printf("Database Full!\n");
+        return;
+    }
+
+    printf("\n-- Faculty Registration --\n");
+    printf("Enter Name: ");
+    getchar();
+    fgets(facultyDB[facultyCount].name, 50, stdin);
+    strtok(facultyDB[facultyCount].name, "\n");
+
+    printf("Enter Employee Code: ");
+    fgets(facultyDB[facultyCount].empCode, 20, stdin);
+    strtok(facultyDB[facultyCount].empCode, "\n");
+
+    printf("Enter Department: ");
+    fgets(facultyDB[facultyCount].department, 50, stdin);
+    strtok(facultyDB[facultyCount].department, "\n");
+
+    printf("Enter Research Publications: ");
+    fgets(facultyDB[facultyCount].publications, 200, stdin);
+    strtok(facultyDB[facultyCount].publications, "\n");
+
+    printf("Enter Seminars Attended: ");
+    fgets(facultyDB[facultyCount].seminars, 200, stdin);
+    strtok(facultyDB[facultyCount].seminars, "\n");
+
+    printf("Enter Projects Undertaken: ");
+    fgets(facultyDB[facultyCount].projects, 200, stdin);
+    strtok(facultyDB[facultyCount].projects, "\n");
+
+    printf("Enter Lectures Delivered: ");
+    fgets(facultyDB[facultyCount].lectures, 200, stdin);
+    strtok(facultyDB[facultyCount].lectures, "\n");
+
+    facultyCount++;
+    printf("Registration Successful!\n");
+}
+
+void viewAllFaculty() {
+    printf("\n-- Faculty Database --\n");
+    for (int i = 0; i < facultyCount; i++) {
+        printf("\nFaculty #%d:\n", i + 1);
+        printf("Name: %s\n", facultyDB[i].name);
+        printf("Employee Code: %s\n", facultyDB[i].empCode);
+        printf("Department: %s\n", facultyDB[i].department);
+        printf("Publications: %s\n", facultyDB[i].publications);
+        printf("Seminars: %s\n", facultyDB[i].seminars);
+        printf("Projects: %s\n", facultyDB[i].projects);
+        printf("Lectures: %s\n", facultyDB[i].lectures);
+    }
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n===== Faculty Appraisal System =====\n");
+        printf("1. Register Faculty\n");
+        printf("2. View All Faculty\n");
+        printf("3. Exit\n");
+        printf("Choose an option: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                registerFaculty();
+                break;
+            case 2:
+                viewAllFaculty();
+                break;
+            case 3:
+                exit(0);
+            default:
+                printf("Invalid Option. Try Again.\n");
+        }
+    }
+
+    return 0;
+}
